@@ -1,0 +1,183 @@
+.flex {
+  display: flex;
+}
+
+.grid {
+  display: grid;
+}
+
+.none {
+  display: none;
+}
+
+.row {
+  flex-direction: row;
+}
+
+.center {
+  align-items: center;
+  justify-content: center;
+}
+
+.align {
+  align-items: center;
+}
+
+.justify {
+  justify-content: center;
+}
+
+.align-start {
+  align-items: start;
+}
+
+.align-end {
+  align-items: end;
+}
+
+.justify-start {
+  justify-content: start;
+}
+
+.justify-end {
+  justify-content: end;
+}
+
+.row {
+  flex-direction: row;
+}
+
+.column {
+  flex-direction: column;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-start {
+  text-align: start;
+}
+
+.text-end {
+  text-align: end;
+}
+
+.outline-unset {
+  outline: 0;
+}
+
+.relative {
+  position: relative;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.fixed {
+  position: fixed;
+}
+
+.left-start {
+  left: 0;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.bd-unset {
+  border: unset;
+}
+
+.h-50 {
+  height: 50%;
+}
+
+.h-93 {
+  height: 93%;
+}
+
+.h-100 {
+  height: 100%;
+}
+
+.h-inh {
+  height: inherit;
+}
+
+.w-inh {
+  width: inherit;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.w-98 {
+  width: 98%;
+}
+
+.w-97 {
+  width: 97%;
+}
+
+.w-95 {
+  width: 95%;
+}
+
+.w-90 {
+  width: 90%;
+}
+
+.w-80 {
+  width: 80%;
+}
+
+.w-50 {
+  width: 50%;
+}
+
+.overflow {
+  overflow: auto;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+.index-out {
+  z-index: 999;
+}
+
+.index-in {
+  z-index: -1;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+.hidden {
+  opacity: 0;
+  visibility: unset;
+}
+
+.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.visible-hover:hover {
+  opacity: 1;
+  visibility: visible;
+}

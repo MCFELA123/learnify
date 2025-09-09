@@ -1,0 +1,59 @@
+#root {
+  max-width: 1280px;
+}
+
+.side-bar {
+ width: 15em;
+ height: 100%;
+ transition: all .3s ease;
+}
+
+.home-view {
+  width: 100%;
+  height: 100%;
+  transition: all .3s ease;
+}
+
+.navbar {
+  height: 2.3em;
+  transition: all .3s ease;
+}
+
+.favicon {
+  width: 2em;
+  height: 2em;
+  border-radius: .5em;
+  transition: all .3s ease;
+}
+
+.card-list input[type=radio] {
+  appearance: none;
+  display: none;
+}
+
+.card-list input[type=radio] + label {
+  width: 100%;
+  cursor: pointer;
+  border-radius: .45em;
+}
+
+.main-side-content {
+  width: 25em;
+  transition: all .3s ease;
+}
+
+.pad-object {
+  padding: 1em;
+  border-radius: 1em;
+}
+
+.course-object {
+  width: 15em;
+  height: 80% !important;
+  border-radius: .9em;
+}
+
+.grid-bg {
+  opacity: .5;
+  transform: skew(-45deg) scale(1.2);
+}

@@ -1,0 +1,210 @@
+:root {
+  --col-white: #ffffff;
+  --col-space: #F6F6F6;
+  --col-light: #ffffff20;
+  --col-lighter: #ffffff13;
+  --col-border: #e9ebef;
+  --col-theme: #0044ff;
+  --col-cyan: #c2f2ff;
+  --col-cyan-v2: #00c8ff;
+  --col-light-grey: #EEEEEE;
+  --col-semi-grey: #E9E9E9;
+  --col-grey: #3b3b3b;
+  --col-dark-grey: #5c5c5c1b;
+  --col-dark: #0d0d0e;
+  --col-darker: #000000;
+  --col-red: #f53333;
+}
+
+body, html, #root {
+  background: var(--col-space);
+  color: var(--col-grey);
+}
+
+.blur {
+  backdrop-filter: blur(1em);
+  -webkit-backdrop-filter: blur(1em);
+}
+
+.col-white {
+  color: var(--col-white);
+}
+
+.col-white-hover:hover text {
+  color: var(--col-white);
+}
+
+.col-danger {
+  color: var(--col-red);
+}
+
+.col-green {
+  color: var(--col-theme);
+}
+
+.col-dark {
+  color: var(--col-dark);
+}
+
+.col-darker {
+  color: var(--col-darker);
+}
+
+.bg-unset {
+  background: unset;
+}
+
+.bg-default {
+  background: var(--col-space);
+}
+
+.bg-theme {
+  background: var(--col-theme);
+}
+
+.bg-grey {
+  background: #E9E9E9;
+}
+
+.bg-light-grey {
+  background: #f0f0f0;
+}
+
+.bg-semi-grey {
+  background: var(--col-light-grey);
+}
+
+.bg-grey:hover {
+  background: #dcdcdc;
+}
+
+.bg-grey-hover:hover {
+  background: #E9E9E9;
+}
+
+.bg-light-grey-hover:hover {
+  background: #f0f0f0;
+}
+
+.bg-dark-grey:hover {
+  background: var(--col-dark-grey);
+}
+
+.bg-white {
+  background: var(--col-white);
+}
+
+.bg-dark {
+  background: var(--col-dark);
+}
+
+.bg-darker {
+  background: var(--col-darker);
+}
+
+.bg-green {
+  background: #0cca64;
+}
+
+.bg-theme-hover:hover {
+  background: var(--col-theme);
+}
+
+.bd-light {
+  box-shadow: 0 0 0 1px #ffffff20;
+}
+
+.bd-grey {
+  border-color: var(--col-border) !important;
+}
+
+.bd-white-hover:hover {
+  background: unset;
+  box-shadow: 0 0 0 1px var(--col-white);
+}
+
+.bd-green-hover:hover {
+  background: unset;
+  box-shadow: 0 0 0 1px #0cca64;
+}
+
+.bg-unset {
+  background: unset;
+}
+
+.bg-cyan {
+  background: var(--col-cyan);
+}
+
+.bg-cyan-v2 {
+  background: var(--col-cyan-v2);
+}
+
+.bd-theme {
+  border-color: var(--col-theme) !important;
+}
+
+.bg-space {
+  background: #e9ebef96;
+}
+
+.bd-grey {
+  border-color: #E9E9E9;
+}
+
+.bd-bottom-grey {
+  border-bottom-color: #E9E9E9 !important;
+}
+
+.bd-light {
+  border-color: var(--col-light) !important;
+}
+
+.bd-lighter {
+  border-color: var(--col-lighter) !important;
+}
+
+.search-bar {
+  border-color: var(--col-border) !important;
+  background: #f0f1f2;
+}
+
+.side-bar {
+  background: var(--col-white);
+  border-right: 1px solid var(--col-border);
+}
+
+.navbar {
+  background: var(--col-white);
+  border-bottom: 1px solid var(--col-border);
+}
+
+.favicon {
+  background: var(--col-dark);
+}
+
+.favico {
+ filter: brightness(2.5);
+ -webkit-filter: brightness(2.5);
+}
+
+.object-pad:hover {
+  background: #e7e8e9bb;
+}
+
+.card-list input[type=radio] + label:hover {
+  background: #e7e8e9bb;
+}
+
+.card-list input[type=radio]:checked + label {
+  background: #e7e8e9bb;
+}
+
+.pad-object, .course-object {
+  border: 1px solid var(--col-semi-grey);
+  box-shadow: 0 3px 5px -2px var(--col-semi-grey);
+}
+
+.grid-bg {
+  background-image: repeating-linear-gradient(to right, var(--col-dark) 0px, var(--col-dark) 1.5px, transparent 1px, transparent 6px);
+}

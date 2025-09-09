@@ -1,0 +1,25 @@
+@media screen and (max-width: 1000px)  {
+ .side-bar {
+ transform: translateX(0);
+ position: relative;
+ z-index: 0;
+ /* box-shadow: 0 0 0 0 #000000 !important; */
+ }
+ .side-bar-helper {
+ display: none !important;
+ }
+}
+
+@media screen and (max-width: 998px)  {
+ .side-bar {
+ transform: translateX(-100%);
+ position: absolute;
+ z-index: 999;
+ }
+ .side-bar-default-helper {
+  display: none;
+ }
+ .side-bar-helper {
+ display: flex !important;
+ }
+}

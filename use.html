@@ -1,0 +1,370 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Procedural Big-Eye Cat NFT Generator</title>
+  <style>
+    body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; display:flex; gap:20px; padding:24px; }
+    #canvasWrap { background:#e9d9bf; padding:20px; border-radius:8px; box-shadow:0 6px 18px rgba(0,0,0,0.08); }
+    canvas { background:transparent; display:block; border-radius:6px; }
+    .controls { display:flex; flex-direction:column; gap:8px; min-width:260px; }
+    button { padding:10px 12px; border-radius:8px; border:none; cursor:pointer; background:#0f1724; color:#fff; }
+    button.secondary { background:#2b394a; }
+    label { font-size:13px; color:#111827; }
+    pre { background:#f8f8f8; padding:8px; border-radius:6px; overflow:auto; max-height:220px; }
+  </style>
+</head>
+<body>
+  <div id="canvasWrap">
+    <canvas id="art" width="1024" height="1024"></canvas>
+  </div>
+
+  <div class="controls">
+    <label><strong>Procedural Big-Eye Cat NFT</strong></label>
+    <button id="genBtn">Generate new variant</button>
+    <button id="exportPNG" class="secondary">Export PNG</button>
+    <button id="exportJSON" class="secondary">Export metadata JSON</button>
+    <label>Seed (optional): <input id="seedInput" placeholder="leave empty for random" /></label>
+    <label>Palette preset:
+      <select id="paletteSelect">
+        <option value="original">Original teal</option>
+        <option value="rose">Rose</option>
+        <option value="violet">Violet</option>
+        <option value="retro">Retro (muted)</option>
+      </select>
+    </label>
+    <label>Current variant metadata:</label>
+    <pre id="metaOut">No variant generated yet.</pre>
+  </div>
+
+<script>
+/*
+ Procedural Big-Eye Cat NFT Generator
+ Plain JavaScript, single-file.
+*/
+
+const canvas = document.getElementById('art');
+const ctx = canvas.getContext('2d', { alpha: true });
+
+// High-DPI scaling
+function resizeForDPI(targetSize = 1024) {
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  canvas.width = targetSize * dpr;
+  canvas.height = targetSize * dpr;
+  canvas.style.width = targetSize + 'px';
+  canvas.style.height = targetSize + 'px';
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+}
+resizeForDPI(1024);
+
+// Simple seeded PRNG (mulberry32)
+function mulberry32(a) {
+  return function() {
+    var t = a += 0x6D2B79F5;
+    t = Math.imul(t ^ t >>> 15, t | 1);
+    t ^= t + Math.imul(t ^ t >>> 7, t | 61);
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  }
+}
+function hashStringToSeed(s) {
+  if(!s) s = String(Math.random());
+  let h = 2166136261 >>> 0;
+  for (let i=0;i<s.length;i++) h = Math.imul(h ^ s.charCodeAt(i), 16777619);
+  return h >>> 0;
+}
+
+// Palettes
+const PALETTES = {
+  original: { bg:'#e9d9bf', hoodie:'#6fb3a7', head:'#0d0c0b', eyeRing:'#7fc1b5', pupil:'#0d0c0b' },
+  rose: { bg:'#f0dbd8', hoodie:'#f09a9d', head:'#1b1412', eyeRing:'#f5b7bb', pupil:'#1b1412' },
+  violet: { bg:'#efe8ff', hoodie:'#9b8cff', head:'#110e17', eyeRing:'#cbbcff', pupil:'#110e17' },
+  retro: { bg:'#f1e7d6', hoodie:'#c6b48f', head:'#151312', eyeRing:'#8fb0a0', pupil:'#151312' }
+};
+
+// helper: draw rounded rectangle path
+function roundRectPath(ctx, x,y,w,h,r){
+  if (r > w/2) r = w/2;
+  if (r > h/2) r = h/2;
+  ctx.beginPath();
+  ctx.moveTo(x+r,y);
+  ctx.arcTo(x+w,y,x+w,y+h,r);
+  ctx.arcTo(x+w,y+h,x,y+h,r);
+  ctx.arcTo(x,y+h,x,y,r);
+  ctx.arcTo(x,y,x+w,y,r);
+  ctx.closePath();
+}
+
+
+// main generator
+function generateVariant(options = {}) {
+  const seedStr = options.seed || (Math.random().toString(36).slice(2,10));
+  const seed = hashStringToSeed(seedStr);
+  const rand = mulberry32(seed);
+  const palette = PALETTES[options.palette] || PALETTES.original;
+
+  // variant parameters randomized
+  const eyeScale = 0.45 + rand()*0.18;             // relative to head
+  const eyeOffsetX = (rand()-0.5) * 0.06;         // small x shift
+  const eyeOffsetY = -0.02 + (rand()-0.5)*0.04;   // small y shift
+  const earTilt = (rand()-0.5) * 0.15;            // ear asymmetry
+  const headSquash = 0.88 + rand()*0.18;          // head horizontal squash
+  const hoodieFold = Math.round(1 + rand()*3);    // number of fold lines
+  const pupilSize = 0.22 + rand()*0.08;
+  const eyeInnerRing = 0.72 + rand()*0.12;
+  const outlineWidth = 6 + Math.floor(rand()*4);
+
+  // draw background
+  ctx.save();
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle = palette.bg;
+  ctx.fillRect(0,0,1024,1024);
+
+  // center coordinates
+  const cx = 512, cy = 470;
+  const headW = 540 * headSquash;
+  const headH = 460;
+
+  // --- head silhouette (cat head with ears) ---
+  ctx.lineJoin = 'round';
+  ctx.lineWidth = outlineWidth;
+  ctx.strokeStyle = 'rgba(0,0,0,1)';
+  ctx.fillStyle = palette.head;
+  ctx.beginPath();
+  // left ear
+  const earHeight = 180;
+  ctx.moveTo(cx - headW/2 + 40, cy - headH/2 + 80);
+  ctx.quadraticCurveTo(cx - headW/2 + 10, cy - headH/2 - 20, cx - headW/2 + 70, cy - headH/2 - earHeight* (1+earTilt));
+  ctx.quadraticCurveTo(cx - headW/2 + 120, cy - headH/2 - 40, cx - headW/2 + 150, cy - headH/2 + 20);
+
+  // top arc across head
+  ctx.quadraticCurveTo(cx, cy - headH/2 - 30, cx + headW/2 - 150, cy - headH/2 + 20);
+
+  // right ear
+  ctx.quadraticCurveTo(cx + headW/2 - 120, cy - headH/2 - 40, cx + headW/2 - 70, cy - headH/2 - earHeight * (1-earTilt));
+  ctx.quadraticCurveTo(cx + headW/2 - 10, cy - headH/2 - 20, cx + headW/2 - 40, cy - headH/2 + 80);
+
+  // down and under jaw
+  ctx.quadraticCurveTo(cx + headW/2 - 10, cy + headH/2 - 30, cx + headW/2 - 100, cy + headH/2 + 80);
+  ctx.quadraticCurveTo(cx, cy + headH/2 + 140, cx - headW/2 + 100, cy + headH/2 + 80);
+  ctx.quadraticCurveTo(cx - headW/2 + 10, cy + headH/2 - 30, cx - headW/2 + 40, cy - headH/2 + 80);
+
+  ctx.closePath();
+  ctx.fill();
+  ctx.stroke();
+
+  // --- eye (single big eye, centered) ---
+  const eyeR_outer = headW * eyeScale * 0.5;
+  const eyeCx = cx + headW*eyeOffsetX*0.6;
+  const eyeCy = cy + headH*eyeOffsetY*0.5;
+
+  // off-white sclera ring
+  ctx.beginPath();
+  ctx.arc(eyeCx, eyeCy, eyeR_outer, 0, Math.PI*2);
+  ctx.fillStyle = palette.bg; // slightly different fill to create the inner ring look
+  ctx.fill();
+
+  // outer dark ring to match reference
+  ctx.lineWidth = outlineWidth;
+  ctx.strokeStyle = palette.head;
+  ctx.beginPath();
+  ctx.arc(eyeCx, eyeCy, eyeR_outer + outlineWidth*0.25, 0, Math.PI*2);
+  ctx.stroke();
+
+  // colored iris ring
+  const irisR = eyeR_outer * eyeInnerRing;
+  ctx.beginPath();
+  ctx.arc(eyeCx, eyeCy, irisR, 0, Math.PI*2);
+  ctx.fillStyle = palette.eyeRing;
+  ctx.fill();
+
+  // pupil (dark)
+  const pupilR = irisR * pupilSize;
+  ctx.beginPath();
+  ctx.arc(eyeCx + (rand()-0.5)*irisR*0.08, eyeCy + (rand()-0.5)*irisR*0.06, pupilR, 0, Math.PI*2);
+  ctx.fillStyle = palette.pupil;
+  ctx.fill();
+
+  // small specular highlight
+  ctx.beginPath();
+  ctx.arc(eyeCx - irisR*0.26, eyeCy - irisR*0.34, irisR*0.15, 0, Math.PI*2);
+  ctx.fillStyle = palette.bg;
+  ctx.fill();
+
+  // eye inner outline (thin)
+  ctx.lineWidth = Math.max(1, outlineWidth*0.4);
+  ctx.strokeStyle = palette.head;
+  ctx.beginPath();
+  ctx.arc(eyeCx, eyeCy, irisR + outlineWidth*0.1, 0, Math.PI*2);
+  ctx.stroke();
+
+  // --- hoodie body ---
+  const hoodTopY = cy + 120;
+  const hoodW = 640;
+  const hoodH = 360;
+  ctx.beginPath();
+  // left shoulder
+  ctx.moveTo(cx - hoodW/2 + 40, hoodTopY + 20);
+  ctx.quadraticCurveTo(cx - hoodW/2 + 30, hoodTopY + 160, cx - hoodW/6, hoodTopY + hoodH - 20);
+  // bottom curve
+  ctx.quadraticCurveTo(cx, hoodTopY + hoodH + 40, cx + hoodW/6, hoodTopY + hoodH - 20);
+  // right shoulder
+  ctx.quadraticCurveTo(cx + hoodW/2 - 30, hoodTopY + 160, cx + hoodW/2 - 40, hoodTopY + 20);
+  // neckline
+  ctx.quadraticCurveTo(cx + 120, hoodTopY + 10, cx + 60, hoodTopY - 30);
+  ctx.quadraticCurveTo(cx, hoodTopY - 80, cx - 60, hoodTopY - 30);
+  ctx.quadraticCurveTo(cx - 120, hoodTopY + 10, cx - hoodW/2 + 40, hoodTopY + 20);
+  ctx.closePath();
+
+  ctx.fillStyle = palette.hoodie;
+  ctx.fill();
+
+  // hoodie outline
+  ctx.lineWidth = outlineWidth;
+  ctx.strokeStyle = palette.head;
+  ctx.stroke();
+
+  // hoodie drawstring
+  const drawX = cx - 40, drawY = hoodTopY - 10, d2 = 80;
+  ctx.lineWidth = 10;
+  ctx.strokeStyle = palette.head;
+  ctx.beginPath();
+  ctx.moveTo(drawX, drawY);
+  ctx.lineTo(drawX, drawY + 140);
+  ctx.moveTo(drawX + d2, drawY);
+  ctx.lineTo(drawX + d2, drawY + 140);
+  ctx.stroke();
+  // drawstring caps (circles)
+  ctx.beginPath();
+  ctx.arc(drawX, drawY + 140, 12, 0, Math.PI*2);
+  ctx.arc(drawX + d2, drawY + 140, 12, 0, Math.PI*2);
+  ctx.fillStyle = palette.head;
+  ctx.fill();
+
+  // hoodie folds - subtle curved lines
+  ctx.lineWidth = 4;
+  ctx.strokeStyle = shadeColor(palette.hoodie, -12); // slightly darker
+  for (let i=0;i<hoodieFold;i++){
+    const t = i/(hoodieFold+1);
+    ctx.beginPath();
+    const sx = cx - hoodW/2 + 140 + t* (hoodW - 280);
+    ctx.moveTo(sx, hoodTopY + 40 + t*20);
+    ctx.quadraticCurveTo(cx, hoodTopY + hoodH*0.5 + 12*t, cx + (sx - cx), hoodTopY + 40 + t*20);
+    ctx.stroke();
+  }
+
+  // final thick outline around head/hood area to match style
+  ctx.lineWidth = outlineWidth + 2;
+  ctx.strokeStyle = palette.head;
+  ctx.beginPath();
+  // draw a rounded shape around head area (approx)
+  ctx.arc(cx, cy + 20, Math.max(headW, headH)/1.6, 0, Math.PI*2);
+  ctx.stroke();
+
+  // add grain/print texture overlay
+  applyPaperGrain(ctx, rand);
+
+  ctx.restore();
+
+  const metadata = {
+    name: "BigEyeCat #" + (seedStr.slice(0,8)),
+    seed: seedStr,
+    palette: options.palette || 'original',
+    traits: {
+      eyeScale: round(eyeScale,3),
+      eyeOffsetX: round(eyeOffsetX,3),
+      eyeOffsetY: round(eyeOffsetY,3),
+      earTilt: round(earTilt,3),
+      headSquash: round(headSquash,3),
+      hoodieFold,
+      pupilSize: round(pupilSize,3),
+    }
+  };
+
+  return metadata;
+}
+
+// small util helpers
+function round(v, d=2){ return Math.round(v*Math.pow(10,d))/Math.pow(10,d); }
+function shadeColor(hex, percent) {
+  // hex like #rrggbb
+  const num = parseInt(hex.slice(1),16);
+  let r = (num >> 16) + percent;
+  let g = ((num >> 8) & 0x00FF) + percent;
+  let b = (num & 0x0000FF) + percent;
+  r = Math.max(0, Math.min(255, r));
+  g = Math.max(0, Math.min(255, g));
+  b = Math.max(0, Math.min(255, b));
+  return '#' + ( (1<<24) + (r<<16) + (g<<8) + b ).toString(16).slice(1);
+}
+
+// adds subtle paper grain by drawing many tiny semi-opaque dots
+function applyPaperGrain(ctx, rand) {
+  const w = 1024, h = 1024;
+  const density = 0.0025; // proportion of pixels to dot
+  const dots = Math.floor(w*h*density);
+  ctx.save();
+  ctx.globalAlpha = 0.06;
+  for (let i=0;i<dots;i++){
+    const x = Math.floor(rand()*w);
+    const y = Math.floor(rand()*h);
+    const size = Math.random()<0.6 ? 1 : 2;
+    ctx.fillStyle = 'rgba(0,0,0,' + (0.08 + rand()*0.06) + ')';
+    ctx.fillRect(x,y,size,size);
+  }
+  // add a subtle global noise using composite
+  ctx.globalAlpha = 0.06;
+  ctx.fillStyle = '#000';
+  ctx.fillRect(0,0,w,h);
+  ctx.globalCompositeOperation = 'soft-light';
+  ctx.fillStyle = 'rgba(255,255,255,0.02)';
+  ctx.fillRect(0,0,w,h);
+  ctx.restore();
+}
+
+// UI wiring
+const genBtn = document.getElementById('genBtn');
+const exportPNG = document.getElementById('exportPNG');
+const exportJSON = document.getElementById('exportJSON');
+const metaOut = document.getElementById('metaOut');
+const seedInput = document.getElementById('seedInput');
+const paletteSelect = document.getElementById('paletteSelect');
+
+let currentMetadata = null;
+
+function doGenerate() {
+  const seedVal = seedInput.value.trim() || undefined;
+  const palette = paletteSelect.value || 'original';
+  const meta = generateVariant({ seed: seedVal, palette });
+  currentMetadata = meta;
+  metaOut.textContent = JSON.stringify(meta, null, 2);
+}
+
+genBtn.addEventListener('click', () => {
+  // if the user left seed empty, create a visible random seed
+  if (!seedInput.value.trim()) seedInput.value = Math.random().toString(36).slice(2,10);
+  doGenerate();
+});
+
+// initial generate
+seedInput.value = Math.random().toString(36).slice(2,10);
+doGenerate();
+
+exportPNG.addEventListener('click', () => {
+  const link = document.createElement('a');
+  link.download = (currentMetadata?.name || 'big-eye-cat') + '.png';
+  link.href = canvas.toDataURL('image/png');
+  link.click();
+});
+
+exportJSON.addEventListener('click', () => {
+  const blob = new Blob([ JSON.stringify(currentMetadata || {}, null, 2) ], { type:'application/json' });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = (currentMetadata?.name || 'metadata') + '.json';
+  link.click();
+  setTimeout(()=>URL.revokeObjectURL(url), 1000);
+});
+</script>
+</body>
+</html>
