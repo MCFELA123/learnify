@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ <meta name="description" content="COS 106 Portfolio — About Me Page details Michael Chibuzor's career aspirations, education, and hobbies" />
+ <title>Learnify — About Me</title>
+ <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- ==================== APP VIEW ==================== -->
+<div class="app-view flex row" id="app-view">
+
+ <!-- ==================== SIDEBAR ==================== -->
+ <div class="side-bar overflow-hidden" id="sidebar">
+ <div class="flex column">
+
+ <!-- Sidebar Header -->
+ <div class="flex row align navbar" style="padding:.5em 1em">
+ <div class="flex row align w-100 gap-05">
+ <div class="flex center overflow-hidden favicon">
+ <div class="flex center favicon favico">
+ <img src="assets/images/favicon.png" alt="favicon" width="33" height="33" />
+ </div>
+ </div>
+ <span class="text-heavy" style="font-size:16px;opacity:1;">Learnify</span>
+ </div>
+ <!-- Close sidebar (mobile) -->
+ <div class="none align side-bar-helper" id="close-sidebar">
+ <div class="object-pad flex center">
+ <img src="sf-symbols/arrow.left.svg" class="sidebar-icon" style="transform:rotate(-180deg)" alt="" />
+ </div>
+ </div>
+ <!-- Menu toggle (desktop) -->
+ <div class="flex align side-bar-default-helper" id="sidebar-menu-toggle">
+ <div class="object-pad flex center">
+ <img src="sf-symbols/line.3.horizontal.svg" class="sidebar-icon" alt="" />
+ </div>
+ </div>
+ </div>
+
+ <!-- Sidebar Navigation -->
+ <div class="flex center">
+ <div class="column relative overflow w-100" style="padding:0 1em">
+
+ <!-- Portfolio Section -->
+ <div>
+ <div class="break-1"></div>
+ <div class="flex row align sidebar-section-label">
+ <div class="flex align w-100">
+ <span class="semi-bold" style="font-size:.8em">COS 106 PORTFOLIO</span>
+ </div>
+ </div>
+ <div class="break-03"></div>
+
+ <!-- Home -->
+ <div class="card-list">
+ <input type="radio" name="card-lists" id="sec0-item0" />
+ <label for="sec0-item0" class="flex align">
+ <a href="index.html" class="sidebar-item-link flex align">
+ <img src="sf-symbols/house.svg" class="sidebar-icon" alt="" />
+ <div class="spacer-02"></div>
+ <span style="opacity:.75">Home / Dashboard</span>
+ </a>
+ </label>
+ </div>
+
+ <!-- About Me -->
+ <div class="card-list">
+ <input type="radio" name="card-lists" id="sec0-item1" checked />
+ <label for="sec0-item1" class="flex align">
+ <a href="about.html" class="sidebar-item-link flex align">
+ <img src="sf-symbols/info.circle.svg" class="sidebar-icon" alt="" />
+ <div class="spacer-02"></div>
+ <span style="opacity:.75">About Me</span>
+ </a>
+ </label>
+ </div>
+
+ <!-- Projects -->
+ <div class="card-list">
+ <input type="radio" name="card-lists" id="sec0-item2" />
+ <label for="sec0-item2" class="flex align">
+ <a href="projects.html" class="sidebar-item-link flex align">
+ <img src="sf-symbols/folder.svg" class="sidebar-icon" alt="" />
+ <div class="spacer-02"></div>
+ <span style="opacity:.75">Projects</span>
+ </a>
+ </label>
+ </div>
+
+ <!-- Academic Planner -->
+ <div class="card-list">
+ <input type="radio" name="card-lists" id="sec0-item3" />
+ <label for="sec0-item3" class="flex align">
+ <a href="planner.html" class="sidebar-item-link flex align">
+ <img src="sf-symbols/calendar.svg" class="sidebar-icon" alt="" />
+ <div class="spacer-02"></div>
+ <span style="opacity:.75">Academic Planner</span>
+ </a>
+ </label>
+ </div>
+
+ <!-- Contact -->
+ <div class="card-list">
+ <input type="radio" name="card-lists" id="sec0-item4" />
+ <label for="sec0-item4" class="flex align">
+ <a href="contact.html" class="sidebar-item-link flex align">
+ <img src="sf-symbols/envelope.svg" class="sidebar-icon" alt="" />
+ <div class="spacer-02"></div>
+ <span style="opacity:.75">Contact Form</span>
+ </a>
+ </label>
+ </div>
+ </div>
+
+ <div class="break-10"></div>
+ </div>
+ </div>
+
+ </div>
+ </div>
+ <!-- END SIDEBAR -->
+
+
+ <!-- ==================== HOME VIEW ==================== -->
+ <div class="home-view flex column">
+
+ <!-- Navbar -->
+ <div class="flex align w-100">
+ <div class="flex row align navbar w-100" style="padding:.5em 1em">
+ <div class="flex row align justify-start w-100 gap-05">
+ <!-- Mobile menu button -->
+ <div class="none side-bar-helper" id="open-sidebar">
+ <div class="object-pad flex center">
+ <img src="sf-symbols/line.3.horizontal.svg" class="sidebar-icon" alt="" />
+ </div>
+ </div>
+ <span class="text-bold" style="opacity:.6">Portfolio</span>
+ <div class="flex column justify-end align">
+ <span class="text-heavy" style="opacity:1;font-size:17px">About Me</span>
+ <img src="assets/images/doodle.png" class="absolute doodle-underline" width="60" alt="" />
+ </div>
+ </div>
+ <div class="flex align justify-end w-100 gap-1">
+ <!-- User Profile -->
+ <div class="user-profile">
+ <div class="flex align w-inh bg-grey-hover" style="border-radius:.4em;padding:.2em">
+ <div class="avatar-wrap">
+ <img src="assets/images/me.png" alt="Michael Chibuzor" />
+ </div>
+ <div class="spacer-03"></div>
+ <span class="semi-bold" style="font-size:.9em">Michael Chibuzor</span>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+
+ <!-- Main Content Area -->
+ <div class="h-100 main-content-area">
+ <div class="flex row w-100 h-100 gap-1">
+
+ <!-- Left Column -->
+ <div class="w-100 h-100 overflow" id="main-scroll" style="padding-right:.5em">
+
+ <!-- Biography Summary Card -->
+ <div class="flex column pad-object bg-white fade-in">
+ <span class="text-heavy" style="opacity:1;font-size:18px">My Background &amp; Motivations</span>
+ <div class="break-05"></div>
+ <span class="text-med" style="font-size:13.5px;line-height:1.5">
+ Developing clean solutions that merge complex code with clear layout designs is what drives me. I strive to enhance human-to-computer experiences through logical structuring, consistent UI styling, and performant interfaces.
+ </span>
+ </div>
+
+ <div class="break-1-5"></div>
+
+ <!-- Educational Background (using table/timeline block styling) -->
+ <div class="flex column pad-object bg-white fade-in">
+ <span class="text-heavy" style="opacity:1;font-size:16px">Educational Background</span>
+ <div class="break-03"></div>
+ <span class="text-bold" style="opacity:.5">A history of my academic qualifications</span>
+ <div class="break-1"></div>
+
+ <div class="table">
+ <!-- Header -->
+ <div class="table-header">
+ <div class="table-cell"><span class="text-heavy">Institution</span></div>
+ <div class="table-cell"><span class="text-heavy">Program</span></div>
+ <div class="table-cell small"><span class="text-heavy">Year</span></div>
+ </div>
+ <!-- Row 1 -->
+ <div class="table-row">
+ <div class="table-cell"><span class="text-heavy">MIVA Open University</span></div>
+ <div class="table-cell"><span class="text-heavy">B.Sc. Software Engineering</span></div>
+ <div class="table-cell small"><span class="text-heavy">2023 - Present</span></div>
+ </div>
+ <!-- Row 2 -->
+ <div class="table-row">
+ <div class="table-cell"><span class="text-heavy">Highland Technical Institute</span></div>
+ <div class="table-cell"><span class="text-heavy">Advanced Diploma in Computer Studies</span></div>
+ <div class="table-cell small"><span class="text-heavy">2021 - 2023</span></div>
+ </div>
+ </div>
+ </div>
+
+ <div class="break-1-5"></div>
+
+ <!-- Career Aspirations (using structured listing) -->
+ <div class="flex column pad-object bg-white fade-in">
+ <span class="text-heavy" style="opacity:1;font-size:16px">Career Aspirations</span>
+ <div class="break-05"></div>
+ <!-- Bullet List for Semantic HTML Requirements -->
+ <ul style="padding-left:1.5em;margin:0">
+ <li style="margin-bottom:.8em">
+ <span class="text-heavy" style="font-size:14px;opacity:1">Full-Stack Software Engineer</span>
+ <p class="text-med" style="font-size:13px;opacity:.7;margin-top:.2em">
+ To secure a technical leadership role within a progressive technology team, implementing large-scale software solutions using web components, APIs, and cloud systems.
+ </p>
+ </li>
+ <li style="margin-bottom:.8em">
+ <span class="text-heavy" style="font-size:14px;opacity:1">Front-End Developer Advocate</span>
+ <p class="text-med" style="font-size:13px;opacity:.7;margin-top:.2em">
+ Promoting software craftsmanship, accessible designs, and standards-compliant coding models for developers worldwide.
+ </p>
+ </li>
+ <li>
+ <span class="text-heavy" style="font-size:14px;opacity:1">Tech Entrepreneur</span>
+ <p class="text-med" style="font-size:13px;opacity:.7;margin-top:.2em">
+ Building software utilities that support students, remote researchers, and tech enthusiasts.
+ </p>
+ </li>
+ </ul>
+ </div>
+
+ <div class="break-1-5"></div>
+
+ <!-- Hobbies & Interests -->
+ <div class="flex column pad-object bg-white fade-in">
+ <span class="text-heavy" style="opacity:1;font-size:16px">Hobbies &amp; Personal Interests</span>
+ <div class="break-05"></div>
+ <!-- Ordered List for Semantic HTML Requirements -->
+ <ol style="padding-left:1.5em;margin:0">
+ <li style="margin-bottom:.5em">
+ <span class="text-bold" style="opacity:1">Exploring open-source repositories</span>: Learning design methodologies by inspecting existing template engines.
+ </li>
+ <li style="margin-bottom:.5em">
+ <span class="text-bold" style="opacity:1">Amateur photography</span>: Capturing structural patterns in urban landscapes.
+ </li>
+ <li style="margin-bottom:.5em">
+ <span class="text-bold" style="opacity:1">Chess</span>: Enhancing cognitive problem-solving and predictive planning patterns.
+ </li>
+ <li>
+ <span class="text-bold" style="opacity:1">Writing technical columns</span>: Discussing clean semantic architectures in CSS layout models.
+ </li>
+ </ol>
+ </div>
+
+ <div class="break-2"></div>
+
+ <div class="break-5"></div>
+ </div>
+
+ <!-- Right Column (Technical Skills Showcase using Progress Bars) -->
+ <div class="h-100 overflow main-side-content">
+ <div class="break-04"></div>
+
+ <div class="flex row relative w-100">
+ <div class="flex align justify-start w-100">
+ <div class="flex align absolute">
+ <span class="text-heavy" style="opacity:1;font-size:16px">Technical Skills</span>
+ </div>
+ </div>
+ </div>
+
+ <div class="break-1"></div>
+
+ <!-- Skills Card -->
+ <div class="flex column pad-object bg-white">
+ <div class="flex column" style="width:100%">
+ <div class="flex row align">
+ <div class="flex align justify-start w-100"><span class="text-heavy" style="opacity:1">HTML5 &amp; CSS3</span></div>
+ <div class="flex align justify-end w-100"><span class="text-heavy" style="opacity:.85">90%</span></div>
+ </div>
+ <div class="break-05"></div>
+ <div class="meter" style="width:100%">
+ <div class="absolute w-inh h-inh grid-bg"></div>
+ <div class="meter-fill" style="width:90%"></div>
+ </div>
+ </div>
+ <div class="break-1"></div>
+
+ <div class="flex column" style="width:100%">
+ <div class="flex row align">
+ <div class="flex align justify-start w-100"><span class="text-heavy" style="opacity:1">JavaScript (ES6+)</span></div>
+ <div class="flex align justify-end w-100"><span class="text-heavy" style="opacity:.85">80%</span></div>
+ </div>
+ <div class="break-05"></div>
+ <div class="meter" style="width:100%">
+ <div class="absolute w-inh h-inh grid-bg"></div>
+ <div class="meter-fill" style="width:80%"></div>
+ </div>
+ </div>
+ <div class="break-1"></div>
+
+ <div class="flex column" style="width:100%">
+ <div class="flex row align">
+ <div class="flex align justify-start w-100"><span class="text-heavy" style="opacity:1">Responsive Layouts</span></div>
+ <div class="flex align justify-end w-100"><span class="text-heavy" style="opacity:.85">85%</span></div>
+ </div>
+ <div class="break-05"></div>
+ <div class="meter" style="width:100%">
+ <div class="absolute w-inh h-inh grid-bg"></div>
+ <div class="meter-fill" style="width:85%"></div>
+ </div>
+ </div>
+ <div class="break-1"></div>
+
+ <div class="flex column" style="width:100%">
+ <div class="flex row align">
+ <div class="flex align justify-start w-100"><span class="text-heavy" style="opacity:1">Git / Version Control</span></div>
+ <div class="flex align justify-end w-100"><span class="text-heavy" style="opacity:.85">75%</span></div>
+ </div>
+ <div class="break-05"></div>
+ <div class="meter" style="width:100%">
+ <div class="absolute w-inh h-inh grid-bg"></div>
+ <div class="meter-fill" style="width:75%"></div>
+ </div>
+ </div>
+ <div class="break-1-5"></div>
+
+ <div class="flex row align">
+ <div class="flex w-100 align-end justify-start">
+ <span class="text-bold" style="font-size:11px">Updated just now</span>
+ </div>
+ </div>
+ </div>
+
+ <div class="break-1-5"></div>
+ </div>
+
+ </div>
+ </div>
+
+ </div>
+ <!-- END HOME VIEW -->
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

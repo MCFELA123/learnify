@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ <meta name="description" content="COS 106 Portfolio Academic Planner — Interactive student task management tool with dynamic updates" />
+ <title>Learnify — Academic Planner</title>
+ <link rel="stylesheet" href="styles.css" />
+ <style>
+ /* Safe additional rules specifically for task rendering to look premium */
+ .task-item {
+ padding: .8em 1em;
+ border: 1px solid var(--col-semi-grey);
+ border-radius: .5em;
+ background: var(--col-white);
+ margin-bottom: .6em;
+ display: flex;
+ flex-direction: row;
+ align-items: center;
+ justify-content: space-between;
+ transition: all .2s ease;
+ }
+ .task-item.completed span {
+ text-decoration: line-through;
+ opacity: .5;
+ }
+ .task-checkbox {
+ width: 1.25em;
+ height: 1.25em;
+ cursor: pointer;
+ }
+ .btn-delete {
+ padding: .4em .8em;
+ border-radius: .4em;
+ background: var(--col-red);
+ color: var(--col-white);
+ cursor: pointer;
+ font-size: 12px;
+ font-family: fontBold;
+ border: none;
+ }
+ .btn-delete:hover {
+ opacity: .8;
+ }
+ </style>
+</head>
+<body>
+
+<!-- ==================== APP VIEW ==================== -->
+<div class="app-view flex row" id="app-view">
+
+ <!-- ==================== SIDEBAR ==================== -->
+ <div class="side-bar overflow-hidden" id="sidebar">
+ <div class="flex column">
+
+ <!-- Sidebar Header -->
+ <div class="flex row align navbar" style="padding:.5em 1em">
+ <div class="flex row align w-100 gap-05">
+ <div class="flex center overflow-hidden favicon">
+ <div class="flex center favicon favico">
+ <img src="assets/images/favicon.png" alt="favicon" width="33" height="33" />
+ </div>
+ </div>
+ <span class="text-heavy" style="font-size:16px;opacity:1;">Learnify</span>
+ </div>
+ <!-- Close sidebar (mobile) -->
+ <div class="none align side-bar-helper" id="close-sidebar">
+ <div class="object-pad flex center">
+ <img src="sf-symbols/arrow.left.svg" class="sidebar-icon" style="transform:rotate(-180deg)" alt="" />
+ </div>
+ </div>
+ <!-- Menu toggle (desktop) -->
+ <div class="flex align side-bar-default-helper" id="sidebar-menu-toggle">
+ <div class="object-pad flex center">
+ <img src="sf-symbols/line.3.horizontal.svg" class="sidebar-icon" alt="" />
+ </div>
+ </div>
+ </div>
+
+ <!-- Sidebar Navigation -->
+ <div class="flex center">
+ <div class="column relative overflow w-100" style="padding:0 1em">
+
+ <!-- Portfolio Section -->
+ <div>
+ <div class="break-1"></div>
+ <div class="flex row align sidebar-section-label">
+ <div class="flex align w-100">
+ <span class="semi-bold" style="font-size:.8em">COS 106 PORTFOLIO</span>
+ </div>
+ </div>
+ <div class="break-03"></div>
+
+ <!-- Home -->
+ <div class="card-list">
+ <input type="radio" name="card-lists" id="sec0-item0" />
+ <label for="sec0-item0" class="flex align">
+ <a href="index.html" class="sidebar-item-link flex align">
+ <img src="sf-symbols/house.svg" class="sidebar-icon" alt="" />
+ <div class="spacer-02"></div>
+ <span style="opacity:.75">Home / Dashboard</span>
+ </a>
+ </label>
+ </div>
+
+ <!-- About Me -->
+ <div class="card-list">
+ <input type="radio" name="card-lists" id="sec0-item1" />
+ <label for="sec0-item1" class="flex align">
+ <a href="about.html" class="sidebar-item-link flex align">
+ <img src="sf-symbols/info.circle.svg" class="sidebar-icon" alt="" />
+ <div class="spacer-02"></div>
+ <span style="opacity:.75">About Me</span>
+ </a>
+ </label>
+ </div>
+
+ <!-- Projects -->
+ <div class="card-list">
+ <input type="radio" name="card-lists" id="sec0-item2" />
+ <label for="sec0-item2" class="flex align">
+ <a href="projects.html" class="sidebar-item-link flex align">
+ <img src="sf-symbols/folder.svg" class="sidebar-icon" alt="" />
+ <div class="spacer-02"></div>
+ <span style="opacity:.75">Projects</span>
+ </a>
+ </label>
+ </div>
+
+ <!-- Academic Planner -->
+ <div class="card-list">
+ <input type="radio" name="card-lists" id="sec0-item3" checked />
+ <label for="sec0-item3" class="flex align">
+ <a href="planner.html" class="sidebar-item-link flex align">
+ <img src="sf-symbols/calendar.svg" class="sidebar-icon" alt="" />
+ <div class="spacer-02"></div>
+ <span style="opacity:.75">Academic Planner</span>
+ </a>
+ </label>
+ </div>
+
+ <!-- Contact -->
+ <div class="card-list">
+ <input type="radio" name="card-lists" id="sec0-item4" />
+ <label for="sec0-item4" class="flex align">
+ <a href="contact.html" class="sidebar-item-link flex align">
+ <img src="sf-symbols/envelope.svg" class="sidebar-icon" alt="" />
+ <div class="spacer-02"></div>
+ <span style="opacity:.75">Contact Form</span>
+ </a>
+ </label>
+ </div>
+ </div>
+
+ <div class="break-10"></div>
+ </div>
+ </div>
+
+ </div>
+ </div>
+ <!-- END SIDEBAR -->
+
+
+ <!-- ==================== HOME VIEW ==================== -->
+ <div class="home-view flex column">
+
+ <!-- Navbar -->
+ <div class="flex align w-100">
+ <div class="flex row align navbar w-100" style="padding:.5em 1em">
+ <div class="flex row align justify-start w-100 gap-05">
+ <!-- Mobile menu button -->
+ <div class="none side-bar-helper" id="open-sidebar">
+ <div class="object-pad flex center">
+ <img src="sf-symbols/line.3.horizontal.svg" class="sidebar-icon" alt="" />
+ </div>
+ </div>
+ <span class="text-bold" style="opacity:.6">Portfolio</span>
+ <div class="flex column justify-end align">
+ <span class="text-heavy" style="opacity:1;font-size:17px">Academic Planner</span>
+ <img src="assets/images/doodle.png" class="absolute doodle-underline" width="60" alt="" />
+ </div>
+ </div>
+ <div class="flex align justify-end w-100 gap-1">
+ <!-- User Profile -->
+ <div class="user-profile">
+ <div class="flex align w-inh bg-grey-hover" style="border-radius:.4em;padding:.2em">
+ <div class="avatar-wrap">
+ <img src="assets/images/me.png" alt="Michael Chibuzor" />
+ </div>
+ <div class="spacer-03"></div>
+ <span class="semi-bold" style="font-size:.9em">Michael Chibuzor</span>
+ </div>
+ </div>
+ </div>
+ </div>
+ </div>
+
+ <!-- Main Content Area -->
+ <div class="h-100 main-content-area">
+ <div class="flex row w-100 h-100 gap-1">
+
+ <!-- Left Column -->
+ <div class="w-100 h-100 overflow" id="main-scroll" style="padding-right:.5em">
+
+ <!-- Planner Task Management Area -->
+ <div class="flex column pad-object bg-white fade-in">
+ <span class="text-heavy" style="opacity:1;font-size:18px">My Academic Planner</span>
+ <div class="break-03"></div>
+ <span class="text-bold" style="opacity:.5">Add, complete, and delete your study schedule tasks</span>
+ <div class="break-1"></div>
+
+ <!-- Task Addition Form -->
+ <form id="add-task-form" onsubmit="event.preventDefault();" style="width:100%">
+ <div class="flex row gap-05 align" style="width:100%">
+ <div class="flex align search-bar overflow-hidden" style="width:100%;max-width:25em;background:var(--col-space);border:1px solid var(--col-semi-grey)">
+ <input type="text" id="task-input" placeholder="Type a new task (e.g. Study COS 106)..." style="width:100%;background:unset;border:unset;outline:0;opacity:.8;padding:.25em .5em" />
+ </div>
+ <button type="submit" id="add-task-btn" class="btn-dark" style="border:unset;font-family:fontBold">Add Task</button>
+ </div>
+ </form>
+ 
+ <div class="break-1-5"></div>
+
+ <!-- Task List Container -->
+ <div id="task-list-container" style="width:100%;max-width:35em">
+ <!-- JS will inject tasks dynamically here -->
+ </div>
+ </div>
+
+ <div class="break-2"></div>
+
+ <div class="break-5"></div>
+ </div>
+
+ <!-- Right Column (Status Panel) -->
+ <div class="h-100 overflow main-side-content">
+ <div class="break-04"></div>
+
+ <div class="flex row relative w-100">
+ <div class="flex align justify-start w-100">
+ <div class="flex align absolute">
+ <span class="text-heavy" style="opacity:1;font-size:16px">Planner Status</span>
+ </div>
+ </div>
+ </div>
+
+ <div class="break-1"></div>
+
+ <!-- Planner Statistics Card -->
+ <div class="flex column pad-object bg-white">
+ <div class="flex row align">
+ <div class="flex align justify-start w-100"><span class="text-heavy" style="opacity:1">Total Tasks</span></div>
+ <div class="flex align justify-end w-100"><span id="stats-total" class="text-heavy" style="opacity:.85">0</span></div>
+ </div>
+ <div class="break-1"></div>
+
+ <div class="flex row align">
+ <div class="flex align justify-start w-100"><span class="text-heavy" style="opacity:1">Completed</span></div>
+ <div class="flex align justify-end w-100"><span id="stats-completed" class="text-heavy" style="opacity:.85">0</span></div>
+ </div>
+ <div class="break-1"></div>
+
+ <div class="flex row align">
+ <div class="flex align justify-start w-100"><span class="text-heavy" style="opacity:1">Pending</span></div>
+ <div class="flex align justify-end w-100"><span id="stats-pending" class="text-heavy" style="opacity:.85">0</span></div>
+ </div>
+ </div>
+
+ <div class="break-1-5"></div>
+ </div>
+
+ </div>
+ </div>
+
+ </div>
+ <!-- END HOME VIEW -->
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
