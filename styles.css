@@ -132,7 +132,7 @@ text {
 
 @media screen and (max-width: 598px) {
   .md-hidden {
-    display: flex;
+    display: block;
      flex-direction: column;
   }
 }
