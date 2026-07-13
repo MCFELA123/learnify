@@ -127,12 +127,12 @@ text {
 }
 
 .md-hidden {
-  display: none;
+  display: none !important;
 }
 
 @media screen and (max-width:563px) {
   .md-hidden {
-    display: initial;
+    display: flex !important;
   }
 }
 
@@ -412,6 +412,12 @@ text {
 .pad-object, .course-object {
   border: 1px solid var(--col-semi-grey);
   box-shadow: 0 3px 5px -2px var(--col-semi-grey);
+}
+
+@media screen and (max-width: 998px) {
+  .pad-object {
+    width: 100%;
+  }
 }
 
 .course-tag {
