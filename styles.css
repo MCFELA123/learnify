@@ -132,8 +132,8 @@ text {
 
 @media screen and (max-width: 598px) {
   .md-hidden {
-    display: block;
-     flex-direction: column;
+    display: unset;
+    /* flex-direction: column; */
   }
 }
 
