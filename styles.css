@@ -126,6 +126,16 @@ text {
   opacity: .7;
 }
 
+.md-hidden {
+  display: none;
+}
+
+@media screen and (max-width:563px) {
+  .md-hidden {
+    display: initial;
+  }
+}
+
 /* ---------- Layout Utilities ---------- */
 .flex { display: flex; }
 .grid { display: grid; }
