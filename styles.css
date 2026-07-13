@@ -130,7 +130,7 @@ text {
   display: none !important;
 }
 
-@media screen and (max-width:563px) {
+@media screen and (max-width: 598px) {
   .md-hidden {
     display: flex !important;
   }
@@ -414,7 +414,7 @@ text {
   box-shadow: 0 3px 5px -2px var(--col-semi-grey);
 }
 
-@media screen and (max-width: 998px) {
+@media screen and (max-width: 598px) {
   .pad-object {
     width: 100%;
   }
